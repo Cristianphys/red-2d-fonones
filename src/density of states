@@ -1,0 +1,124 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.signal import find_peaks
+
+# Parámetros físicos
+K = 1.0    # constante de resorte
+m = 1.0    # masa
+a = 1.0    # parámetro de red
+
+# Malla en el espacio recíproco, entre mayor los valores de N, mejor sera la visualizacion.
+N = 800  # puntos por lado (N x N = 640000 puntos totales)
+k_max = np.pi / a
+
+k_vals = np.linspace(-k_max, k_max, N)
+KX, KY = np.meshgrid(k_vals, k_vals)
+
+# aqui va la Relación de dispersión omega(kx, ky) obtenida para la red en 2D
+
+omega = np.sqrt((4 * K / m) * (np.sin(KX * a / 2)**2 + np.sin(KY * a / 2)**2))
+
+# Aplanar a 1D para el histograma
+omega_flat = omega.flatten()
+
+# se colocan las Frecuencias de puntos críticos obtenido es la red de 2D
+omega_X = np.sqrt(4 * K / m)    # X: silla de montar
+omega_M = np.sqrt(8 * K / m)    # M: máximo
+
+print("=" * 60)
+print("PUNTOS CRÍTICOS ANALÍTICOS")
+print("=" * 60)
+print(f" Gamma (mínimo):  omega = 0")
+print(f" X (silla):        omega_X = {omega_X:.6f}")
+print(f" M (máximo):       omega_M = {omega_M:.6f}")
+print(f" Ancho de banda:   [0, {omega_M:.6f}]")
+print("=" * 60)
+
+N_total = N * N
+N_bins = int(np.sqrt(N_total) * 3)  # número de bins
+
+hist, bin_edges = np.histogram(omega_flat, bins=N_bins, range=(0, omega_M))
+
+# Centros de cada bin
+centros_omega = (bin_edges[:-1] + bin_edges[1:]) / 2
+domega = bin_edges[1] - bin_edges[0]
+
+# Densidad de estados
+g_omega = hist.astype(float)
+
+# Detección automática de picos (singularidades)
+prominence_threshold = 0.02 * g_omega.max()
+height_threshold = 0.05 * g_omega.max()
+
+peaks_idx, peaks_props = find_peaks(
+    g_omega,
+    prominence=prominence_threshold,
+    height=height_threshold,
+    distance=20
+)
+
+picos_omega = centros_omega[peaks_idx]
+picos_g = g_omega[peaks_idx]
+picos_prominence = peaks_props['prominences']
+
+print("\nPICOS DETECTADOS NUMÉRICAMENTE:")
+print("-" * 60)
+for i, (w, g_val, prom) in enumerate(zip(picos_omega, picos_g, picos_prominence)):
+    tipo = ""
+    if np.abs(w - omega_X) < 0.05 * omega_X:
+        tipo = " <-- SINGULARIDAD DE VAN HOVE (silla X)"
+    elif np.abs(w - omega_M) < 0.05 * omega_M:
+        tipo = " (borde de banda M)"
+    elif w < 0.01:
+        tipo = " (Gamma - inicio)"
+    print(f"  Pico {i+1}: omega = {w:.6f}  |  g = {g_val:.2f}  |  prominencia = {prom:.2f}{tipo}")
+print("-" * 60)
+
+# llamar para los graficos
+
+fig, axes = plt.subplots(1, 2, figsize=(16, 6))
+
+# --- Panel 1: g(omega) completa ---
+ax1 = axes[0]
+ax1.plot(centros_omega, g_omega, 'b-', linewidth=1.2)
+ax1.fill_between(centros_omega, g_omega, alpha=0.3, color='blue')
+
+# Picos detectados
+ax1.plot(picos_omega, picos_g, 'ro', markersize=8, markeredgecolor='darkred',
+         label='Picos detectados')
+
+# Líneas en puntos críticos
+ax1.axvline(x=0, color='cyan', linestyle='--', linewidth=2, alpha=0.7, label=r'$\Gamma$ (mín)')
+ax1.axvline(x=omega_X, color='green', linestyle='--', linewidth=2, alpha=0.7,
+            label=rf'$X$ (silla, $\omega_X = {omega_X:.3f}$)')
+ax1.axvline(x=omega_M, color='red', linestyle='--', linewidth=2, alpha=0.7,
+            label=rf'$M$ (máx, $\omega_M = {omega_M:.3f}$)')
+
+ax1.set_xlabel(r'$\omega$', fontsize=13)
+ax1.set_ylabel(r'$g(\omega)$ numerico', fontsize=13)
+ax1.set_title('Densidad de estados $g(\omega)$ fonónica en 2D', fontsize=14)
+ax1.legend(fontsize=9, loc='upper right')
+ax1.grid(True, alpha=0.3)
+ax1.set_xlim(0, omega_M * 1.05)
+
+# --- Panel 2: Escala logarítmica ---
+ax2 = axes[1]
+g_omega_pos = np.maximum(g_omega, 1e-10)
+ax2.semilogy(centros_omega, g_omega_pos + 1, 'b-', linewidth=1.2)
+ax2.axvline(x=omega_X, color='green', linestyle='--', linewidth=2, alpha=0.7,
+            label=rf'$\omega_X$')
+ax2.axvline(x=omega_M, color='red', linestyle='--', linewidth=2, alpha=0.7,
+            label=rf'$\omega_M$')
+ax2.axvspan(omega_X - 0.1*omega_X, omega_X + 0.1*omega_X,
+            alpha=0.15, color='green', label='Región singularidad')
+ax2.plot(picos_omega, picos_g + 1, 'ro', markersize=8, markeredgecolor='darkred')
+
+ax2.set_xlabel(r'$\omega$', fontsize=13)
+ax2.set_ylabel(r'$\log[g(\omega)]$', fontsize=13)
+ax2.set_title('Escala logarítmica', fontsize=14)
+ax2.legend(fontsize=9)
+ax2.grid(True, alpha=0.3)
+ax2.set_xlim(0, omega_M * 1.05)
+
+plt.tight_layout()
+plt.show()
