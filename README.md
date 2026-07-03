@@ -8,26 +8,12 @@ VOY A COLOCAR UN RESUMEN DEL TRABAJO, EL PROBLEMA, EL RESULTADO Y CONCLUSIONES O
 
 ---
 
-## 📐 Fundamento Teórico
+## Resolucion Teórica
+Voy a colocar las ecuaciones operaciones importantes junto con su significado
 
-Consideramos una red bidimensional cuadrada con átomos de masa $M$ conectados a sus primeros vecinos mediante resortes de constante elástica $C$. Las ecuaciones de movimiento para el desplazamiento del átomo en la posición $(l,m)$ están dadas por:
 
-$$M \ddot{u}_{l,m} = -C (2u_{l,m} - u_{l+1,m} - u_{l-1,m}) - C' (2u_{l,m} - u_{l,m+1} - u_{l,m-1})$$
-
-Proponiendo soluciones de tipo onda viajera $u_{l,m} = \epsilon e^{i(k_x la + k_y ma - \omega t)}$, el problema se reduce a encontrar los eigenvalores de la **Matriz Dinámica** $D(\mathbf{k})$:
-
-$$\det|D(\mathbf{k}) - \omega^2 I| = 0$$
-
-Para una red cuadrada con interacciones a primeros vecinos, la relación de dispersión analítica resultante es:
-
-$$\omega(\mathbf{k}) = 2 \sqrt{\frac{C}{M}} \left| \sin\left(\frac{k_x a}{2}\right) \right| + \dots$$
-
----
-
-## 📊 Resultados y Gráficas
-
-Las simulaciones numéricas permiten mapear la frecuencia $\omega$ a lo largo de las direcciones de alta simetría de la zona de Brillouin ($\Gamma \rightarrow X \rightarrow M \rightarrow \Gamma$) y evaluar la densidad de estados.
-
+## Resultados y Gráficas
+resultados de los codigos Python dejados en carpeta src.
 ### 1. Relación de Dispersión Fonónica
 *(Inserta aquí tu gráfica de las bandas de energía/frecuencia)*
 ![Relación de Dispersión](assets/grafico1.png)
@@ -38,7 +24,7 @@ Las simulaciones numéricas permiten mapear la frecuencia $\omega$ a lo largo de
 
 ---
 
-## 🛠️ Tecnologías y Librerías Utilizadas
+## Librerías Utilizadas en Python
 
 * **Python 3.x** - Lenguaje principal de desarrollo.
 * **NumPy** - Para la construcción de mallas en el espacio recíproco y operaciones matriciales eficientes.
@@ -46,15 +32,12 @@ Las simulaciones numéricas permiten mapear la frecuencia $\omega$ a lo largo de
 * **Matplotlib & Seaborn** - Para la generación de gráficos científicos listos para publicación.
 * **LaTeX** - Empleado para la redacción del reporte detallado del proyecto.
 
----
+-------------
 
 ## 📁 Estructura del Repositorio
-
 * `/src`: Contiene los scripts de Python (`simulacion_red.py` o Jupyter Notebooks).
-* `/docs`: Reporte final en PDF generado con el código de LaTeX original.
 * `/assets`: Imágenes y gráficas utilizadas en este archivo de presentación.
-
----
+---------------------
 
 ## 🔧 Cómo Ejecutar la Simulación
 
