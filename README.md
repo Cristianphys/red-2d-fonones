@@ -1,9 +1,8 @@
 # Simulación Numérica de Modos Fonónicos y Densidad de Estados (DOS) en una Red Cristalina 2D
+VOY A COLOCAR UN RESUMEN DEL TRABAJO, EL PROBLEMA, EL RESULTADO Y CONCLUSIONES OBTENIDAS EN EL TRABAJO
 
-Este repositorio contiene el desarrollo teórico y la implementación numérica en Python para resolver la dinámica de red de un cristal bidimensional cuadrado clásico. El proyecto combina el formalismo de la física del estado sólido con técnicas de diagonalización de matrices dinámicas para obtener las relaciones de dispersión y la Densidad de Estados (DOS).
-
-## 🚀 Características del Proyecto
-* **Resolución Teórica:** Modelado analítico mediante ecuaciones de movimiento clásico y formalismo de matriz dinámica en LaTeX.
+## Partes del Proyecto
+* **Resolución Teórica:**Formulacion analitica de la vibaracion de una red bidimensional monoatomica en la Primera Zona de Brillouin.
 * **Cálculo Numérico:** Implementación en Python utilizando `NumPy` y `SciPy` para resolver problemas de eigenvalores en la Primera Zona de Brillouin.
 * **Visualización de Datos:** Gráficas de alta calidad de las ramas fonónicas y de la DOS numérica frente a la analítica (Singularidades de Van Hove) usando `Matplotlib`.
 
