@@ -141,6 +141,22 @@ We can see the group velocity vectors, allowing us to observe how the waves prop
 **Figure 4. State density graph for the two-dimensional network by numerical method**
 ![state density](assets/grafic4.jpg)
 
+In Figure 4, we see the density of states $g(\omega)$ for the frequencies at $\omega(k_x,k_y)$. We can observe that the density exhibits certain behavior in the three regions $(\Gamma, X, M)$, which we discussed theoretically, with the symmetry points being a notable result.
+
+When $\omega \rightarrow 0)$, we see linear behavior in that region, where $g(\omega)$ is proportional to $\omega$, validating the interpretation that the dispersion is isotropic in the regions near $\Gamma$.
+
+As the region approaches point X, we see the pronounced peak as the maximum frequency value, where it actually has a saddle shape, which we will see in the logarithmic plot. This point is important because we see a large accumulation of peaks near X, with the modes having almost the same frequencies. Now we see a tail in the graph where the states decrease to the frequency value obtained in the theoretical solution.
+
+
+**Figure 5. State density graph for the two-dimensional network by numerical method on a logarithmic scale**
+
+
+![state density](assets/grafic5.jpg)
+
+
+
+
+Figure 5 shows the shape of a saddle point in 2D. It also reveals symmetry both before and after point X, without any abrupt change. This allows us to compare it to the Debye model. Debye does not capture the fine structure imposed by the lattice's periodicity: it lacks van Hove singularities, replaces natural decay, and completely eliminates anisotropy and group velocity cancellation effects at zone boundaries.
 
 
 ## Libraries Used in Python
