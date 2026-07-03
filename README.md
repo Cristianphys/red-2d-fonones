@@ -31,7 +31,7 @@ Las simulaciones numéricas permiten mapear la frecuencia $\omega$ a lo largo de
 
 ### 1. Relación de Dispersión Fonónica
 *(Inserta aquí tu gráfica de las bandas de energía/frecuencia)*
-![Relación de Dispersión](assets/dispersion_relation.png)
+![Relación de Dispersión](assets/dispesion red2dfonones.png)
 
 ### 2. Densidad de Estados Numérica (DOS)
 *(Inserta aquí tu gráfica del histograma o curva de la DOS, idealmente mostrando las singularidades)*
