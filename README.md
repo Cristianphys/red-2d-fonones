@@ -35,7 +35,7 @@ Results from the Python code left in the src folder.
 
 ### 1. Phononic Dispersion Ratio
 *(Insert your energy/frequency band graph here)*
-![Dispersion Ratio](assets/graph1.png)
+![Dispersion Ratio](assets/grafico1.png)
 
 ### 2. Numerical Density of States (DOS)
 *(Insert your DOS histogram or curve graph here, ideally showing singularities)*
