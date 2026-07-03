@@ -93,29 +93,36 @@ $$V_g(k, k) = a \sqrt{\frac{K}{2m}} \cos\left(\frac{ka}{2}\right) [\hat{x} + \ha
 
 Based on the results above, the group velocity is not isotropic throughout $1^a$ The Brillouin Z, there are regions where it is anisotropic, the reason is that $V_g$ depends on the wave vector, where for the region $\Gamma$ , $V_g$ is isotropic and for near the region $\pm \frac{\pi}{a}$, $V_g \propto \hat{k}$, hence we obtained the above results.
 
+**Relationship between critical frequency points and Van Hove singularities in the density of states.**
+Para la densidad de estados en 3-D tenemos la ecuación:
 
+$$ D(\omega) = \frac{V}{(2\pi)^3} \int \frac{dS_\omega}{v_g}$$
 
+Si ajustamos para 2-D una superficie en el plano, se ajusta como:
+
+$$ D(\omega) = \frac{A}{(2\pi)^2} \oint \frac{dl_k}{|\nabla_k \omega|} \quad ; \quad |\nabla_k \omega| = v_g$$
+
+Para encontrar las singularidades de Van Hove vemos en la densidad de estados que:
+
+$$\omega^2(k) \approx \frac{2K}{m} \left[ 2 - \left( 1 - \frac{k_x^2 a^2}{2} \right) - \left( 1 - \frac{k_y^2 a^2}{2} \right) \right]$$
+ $$\approx \frac{K a^2}{m} (k_x^2 + k_y^2) \quad ; \text{ siendo } \omega(k) \approx a \sqrt{\frac{K}{m}} |\vec{k}|$$
+ Siendo valor mínimo, lo cual $D(\omega) \propto \omega$ (Lineal).
+Ahora para un punto $X = \left( \frac{\pi}{a}, 0 \right)$ --- $\omega_x = \sqrt{\frac{4K}{m}}$, resultado obtenido anteriormente
  
+ $$\omega^2(k) \approx \frac{2K}{m} \left[ 2 + 1 - \frac{q_x^2 a^2}{2} - 1 + \frac{q_y^2 a^2}{2} \right] = \frac{2K}{m} \left[ 2 - \frac{q_x^2 a^2}{2} + \frac{q_y^2 a^2}{2} \right]$$
  
- 
- 
+ $$\omega^2(k) \approx \frac{4K}{m} + \frac{Ka^2}{m} (-q_x^2 + q_y^2)$$
 
+lo cual vemos una curva negativa en $q_x$ y positiva en $q_y$.
+Por último, en los extremos de $1^a$ Z de Brillouin $M=(\pi/a, \pi/a)$
 
-
-
-
-
-
-
-
-
-
+ $$\omega^2(k) \approx \frac{8K}{m} - \frac{Ka^2}{m} (q_x^2 + q_y^2)$$
 
 ## Results and Graphs
 Results from the Python code left in the src folder.
 
 ### 1. Phononic Dispersion Ratio
-**Figure 1. grafico de la dispersion**
+**Figure 1. scatter plot $\omega(k_{x}, k_{y})$***
 ![Dispersion Ratio](assets/grafico1.png)
 Figure 1 shows a saddle-shaped surface that allows us to quantify the frequency magnitude at the high symmetry points $\Gamma$, $X$, and $M$.
 We see that in the case of $\Gamma$, the values ​​are smaller than those of $\omega(k_x,k_y)$, since this region is considered the long-wave limit, equivalent to the Debye model. As $k_x$ and $k_y$ take on values, $\omega(k_x,k_y)$ increases until the regions that define the first Briolluin zone, $X$ and $M$, with $X$ representing the regions where the value of $\omega(k_x,k_y)$ is at its maximum. The graph on the right provides a clearer view of the frequency behavior. Regions near $\Gamma$ have a circular shape, indicating that they represent constant frequencies in all directions.
@@ -125,10 +132,13 @@ Figure 2. Graph of the magnitude and flow of group velocity for a two-dimensiona
 --
 Figure 2 shows the magnitude and flux of the wave's group velocity in the first Broullin zone, where the yellow coloration indicates the highest velocity magnitude near the Gamma region.
 The magnitude and flux decrease as we move away from Gamma, where the black dots represent the high symmetry points mentioned earlier. It's worth noting that the propagation velocity for a two-dimensional monoatomic lattice exhibits anisotropy due to the flux observed as we move away from Gamma, while near Gamma, X, and M result in non-constant velocities.
-Figure 2. Graph of the magnitude and flow of group velocity for a two-dimensional network.
-![group speed](assets/vgcampo.png).
 
+**Figure 3. Graph of the vector field of the group velocity embedded in $\omega(k_{x}, k_{y})$**
+![group vector](assets/vgcampo.jpg).
 
+We can see the group velocity vectors, allowing us to observe how the waves propagate with respect to $(\Gamma, X,M)$. We see that at the points $(X,M)$, the velocity vanishes at the edges of the zone, indicating the presence of standing waves. Figure 6 shows how energy "flows" in reciprocal space.
+
+**Figure 4. State density graph for the two-dimensional network by numerical method**
 
 
 
