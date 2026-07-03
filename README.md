@@ -28,26 +28,97 @@ $$\sum F = m \frac{d^2 u_n}{dt^2} = K \left[ U_{n_x+1, n_y} - U_{n_x, n_y} + U_{
 **Since we are working with a periodic network, we can propose a Bloch wave as a solution:
 
 $$ U_n(t) = A e^{i(\vec{k} \cdot \vec{R}_n - \omega t)}$$
+
 where, by operating on the previously obtained equation of motion, we can find the dispersion relation. The dispersion relation for 2-D network vibration is defined as:
 
 $$ \omega(k_{x}, k_{y}) = \sqrt{\frac{4K}{m} \left[ \sin^2\left(\frac{k_x a}{2}\right) + \sin^2\left(\frac{k_y a}{2}\right) \right]}$$
 
-Dispersión en la primera zona de Brillouin
-Basándonos en el caso de 1-D, la primera Zona de Brillouin sería $-\frac{\pi}{a} < k \leq \frac{\pi}{a}$, lo cual para el caso de 2-D $k_x$ y $k_y$ tenemos en
+Dispersion in the first Brillouin zone
+Based on the 1-D case, the first Brillouin zone would be $-\frac{\pi}{a} < k \leq \frac{\pi}{a}$, which for the 2-D case $k_x$ and $k_y$ gives us:
 
-$$  -\frac{\pi}{a} < k_x \leq \frac{\pi}{a} \quad , \quad -\frac{\pi}{a} < k_y \leq \frac{\pi}{a}$$
+$$ -\frac{\pi}{a} < k_x \leq \frac{\pi}{a} \quad , \quad -\frac{\pi}{a} < k_y \leq \frac{\pi}{a}$$
 
-es coherente ya que esta red es cuadrada en el espacio recíproco.
+This is consistent since this lattice is square in reciprocal space.
 
-**puntos de alta simetría $$\Gamma$,X,M$$, donde ahora vamos a Calcularlos; estos símbolos nos permiten entender qué valores toman
-$k_x,k_y$*
------
+high symmetry points $\Gamma$ , $X$ and $M$.
+
+In the case of $\Gamma = (0,0) = (k_x=0, k_y=0)$
+
+
+$$\omega(k_x, k_y) = \omega(0,0)$$ 
+
+$$\omega(0,0) = 0 $$ 
+
+
+When $X = (\pi/a, 0)$: 
+
+$$\omega(\pi/a, 0)= \left[ \frac{4K}{m} \left( \sin^2\left(\frac{\frac{\pi}{a} a}{2}\right) + \sin^2(0) \right) \right]^{1/2} $$
+
+$$ = \left[ \frac{4K}{m} \left( \sin^2\left(\frac{\pi}{2}\right) + 0 \right) \right]^{1/2}$$ 
+
+$$ = \left[ \frac{4K}{m} (1) \right]^{1/2} = \sqrt{\frac{4K}{m}} $$ 
+
+Case $M = (\pi/a, \pi/a)$: 
+
+$$\omega(\pi/a, \pi/a) = \left[ \frac{4K}{m} \left( \sin^2\left(\frac{\frac{\pi}{a} a}{2}\right) + \sin^2\left(\frac{\frac{\pi}{a} a}{2}\right) \right) \right]^{1/2}$$ 
+
+
+$$\omega(\pi/a, \pi/a) = \left[ \frac{4K}{m} (1 + 1) \right]^{1/2} = \sqrt{\frac{8K}{m}}$$ 
+
+In figure 1 we can see the dispersion relationship in the first brioullin zone, reflected The points of high symmetry in the lattice. When working with a periodic lattice, only the first zone is considered, since the other zones are analogous (periodic).
+
+**Vector Group Velocity and Discussion of its Anisotropy**
+
+The group velocity is defined as:
+
+$$ V_g(k) = \nabla_k \omega(k) = \left( \frac{\partial \omega}{\partial k_x}, \frac{\partial \omega}{\partial k_y} \right)$$
+
+In this section, the dispersion relation is used, and the paracillary differentiation is applied with respect to each k, resulting in:
+
+$$ V_g(\vec{k})= \frac{a \sqrt{\frac{K}{2m}} [\sin(k_x a) \hat{x} + \sin(k_y a) \hat{y}]}{\sqrt{2 - \cos(k_x a) - \cos(k_y a)}}$$
+
+Where $v_s = a √(2k/m)$  is the speed of sound.
+
+For the case of $\Gamma$, the propagation is isotropic $V_g(\vec{k}) = a \sqrt{\frac{K}{2m}} \hat{k}$
+
+Now for the case $X (k_y=0)$:
+
+$$ V_g(k_x, 0) = a \sqrt{\frac{K}{m}} \cos\left(\frac{k_x a}{2}\right) \hat{x}$$
+
+For the case $M (k_x = k_y = k)$:
+
+$$V_g(k, k) = a \sqrt{\frac{K}{2m}} \cos\left(\frac{ka}{2}\right) [\hat{x} + \hat{y}]$$
+
+**Discussion of Anisotropy**
+
+Based on the results above, the group velocity is not isotropic throughout $1^a$ The Brillouin Z, there are regions where it is anisotropic, the reason is that $V_g$ depends on the wave vector, where for the region $\Gamma$ , $V_g$ is isotropic and for near the region $\pm \frac{\pi}{a}$, $V_g \propto \hat{k}$, hence we obtained the above results.
+
+
+
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 ## Results and Graphs
 Results from the Python code left in the src folder.
 
 ### 1. Phononic Dispersion Ratio
-*(Insert your energy/frequency band graph here)*
+Figure 1. grafico de la dispersion
 ![Dispersion Ratio](assets/grafico1.png)
+Figure 1 shows a saddle-shaped surface that allows us to quantify the frequency magnitude at the high symmetry points $\Gamma$, $X$, and $M$.
+We see that in the case of $\Gamma$, the values ​​are smaller than those of $\omega(k_x,k_y)$, since this region is considered the long-wave limit, equivalent to the Debye model. As $k_x$ and $k_y$ take on values, $\omega(k_x,k_y)$ increases until the regions that define the first Briolluin zone, $X$ and $M$, with $X$ representing the regions where the value of $\omega(k_x,k_y)$ is at its maximum. The graph on the right provides a clearer view of the frequency behavior. Regions near $\Gamma$ have a circular shape, indicating that they represent constant frequencies in all directions.
 
 ### 2. Numerical Density of States (DOS)
 *(Insert your DOS histogram or curve graph here, ideally showing singularities)*
