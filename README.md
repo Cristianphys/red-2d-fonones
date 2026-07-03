@@ -1,6 +1,11 @@
 # Numerical Simulation of Phononic Modes and Density of States (DOS) in a 2D Crystal Lattice
-I WILL INCLUDE A SUMMARY OF THE WORK, THE PROBLEM, THE RESULTS, AND THE CONCLUSIONS REACHED.
+## Overview
 
+This repository presents a comprehensive theoretical and computational analysis of acoustic phonon dynamics within a two-dimensional square crystal lattice. By combining analytical physics frameworks with numerical simulations in Python, this project models the dispersion relations, group velocity vector fields, and the electronic/phononic Density of States (DOS) to map the macroscopic thermodynamic properties of the lattice from microscopic interactions.
+Visualized the full phononic band structure across the First Brillouin Zone, Computed and visualized both the magnitude and flow of the group velocity ($v_g = \nabla_k \omega$). This includes an advanced representation of the group velocity vector field embedded directly onto the $\omega(k_x, k_y)$ energy landscape to analyze energy transport. 
+ Implemented a numerical sampling algorithm to compute the DOS, capturing the characteristic Van Hove singularities of a 2D system.
+ ## Real-world applications
+The presented project originates in theoretical and computational physics (simulation), but can be scaled for sectors in **Advanced Materials and Semiconductor Design**: Acoustic phonon modeling and group velocity are fundamental for **thermal management**, allowing for the prediction and control of how heat propagates through materials via simulations. This is applied in seismic isolation and noise reduction structures in the aerospace and automotive industries. Last but not least, **Data Science, Quantitative Analysis, and R&D Engineering**.
 ## Project Components
 * **Theoretical Solution:** Analytical formulation of the vibration of a two-dimensional monoatomic lattice in the First Brillouin Zone.
 
@@ -155,9 +160,14 @@ As the region approaches point X, we see the pronounced peak as the maximum freq
 
 
 
-
 Figure 5 shows the shape of a saddle point in 2D. It also reveals symmetry both before and after point X, without any abrupt change. This allows us to compare it to the Debye model. Debye does not capture the fine structure imposed by the lattice's periodicity: it lacks van Hove singularities, replaces natural decay, and completely eliminates anisotropy and group velocity cancellation effects at zone boundaries.
 
+**Comparison between the state density of the Debye model at low frequencies with respect to the state density of the 2D network**
+
+Figure 6. The left graph compares the state count of the 2D network and the Debye network. The right graph, taken from \cite{kittel2018introduction}, represents the analytical state density; both graphs consider the low-frequency regime $\omega$.
+![state density](assets/grafic6.jpg)
+
+In Figure 6, we can observe that the Debye model does not describe a real network because it overestimates the state measurements at the frequencies before reaching the first Brioullin zone. When in the Brioullin zone, the Debye estimate is lower than the actual value. The most interesting aspect is when it reaches the boundary of this zone, where its decay does not match the graph shown in Figure 4. Instead, the Debye state density drops sharply, representing the weak point of the Debye model. Figure 6 demonstrates the validity of the calculations and the results obtained.
 
 ## Libraries Used in Python
 
@@ -185,4 +195,4 @@ Figure 5 shows the shape of a saddle point in 2D. It also reveals symmetry both 
 1. Clone this repository:
 
 ``bash
-   git clone [https://github.com/TU_USUARIO/red-bidimensional-fonones.git](https://github.com/TU_USUARIO/red-bidimensional-fonones.git)
+   git clone [https://github.com/Cristianphys/red-2d-fonones.git](https://github.com/Cristianphys/red-2d-fonones.git)
