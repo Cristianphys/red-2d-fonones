@@ -139,6 +139,7 @@ The magnitude and flux decrease as we move away from Gamma, where the black dots
 We can see the group velocity vectors, allowing us to observe how the waves propagate with respect to $(\Gamma, X,M)$. We see that at the points $(X,M)$, the velocity vanishes at the edges of the zone, indicating the presence of standing waves. Figure 6 shows how energy "flows" in reciprocal space.
 
 **Figure 4. State density graph for the two-dimensional network by numerical method**
+![state density](assets/grafic4.jpg)
 
 
 
