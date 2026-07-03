@@ -1,0 +1,128 @@
+import numpy as np
+import matplotlib.pyplot as plt
+#definamos los parametros fisicos, iguales al pirmer codigo
+# Parámetros físicos
+K = 1.0    # constante de resorte
+m = 1.0    # masa
+a = 1.0    # parámetro de red
+
+
+# Submalla en el espacio recíproco, colocamos un valor de N pequeño para que este solo grafique una malla.
+N = 25  # número de puntos por lado en la submalla (NxN vectores)
+
+k_max = np.pi / a
+kx = np.linspace(-k_max, k_max, N)
+ky = np.linspace(-k_max, k_max, N)
+
+KX, KY = np.meshgrid(kx, ky)
+
+# ahora, vamos con el caluclo de la relacion de dispersion y la velocidad de grupo
+# Cálculo de omega y v_g
+# omega(kx, ky)
+omega = np.sqrt((4*K/m) * (np.sin(KX*a/2)**2 + np.sin(KY*a/2)**2))
+
+# Componentes de la velocidad de grupo
+# v_gx = (K*a/(m*omega)) * sin(kx*a)
+# v_gy = (K*a/(m*omega)) * sin(ky*a)
+# En Gamma (kx=0, ky=0) omega=0 y la fórmula es singular
+# Tratamos ese punto por separado
+
+factor = K * a / m
+
+# Inicializar arrays
+VX = np.zeros_like(KX)
+VY = np.zeros_like(KY)
+
+# Máscara para puntos con omega > 0
+mask = (omega > 1e-12)
+
+VX[mask] = factor * np.sin(KX[mask] * a) / omega[mask]
+VY[mask] = factor * np.sin(KY[mask] * a) / omega[mask]
+# definiciones de los puntos de alta simetria tanto de la dispersion como la velocidad de grupo.
+# En Gamma (omega = 0), la velocidad es isotrópica pero depende de la dirección de k
+# Para k pequeño: v_g = v_s * k_hat, con v_s = a*sqrt(2K/m)
+# Calculamos el límite correcto en Gamma usando la aproximación lineal
+# En Gamma exacto, v_g es una singularidad removible: no tiene dirección única,
+# pero tiende a v_s en cada dirección. Dejamos Gamma como vector nulo.
+# (El origen queda sin vector, lo manejamos en el gráfico)
+
+# Magnitud de la velocidad de grupo
+V_mag = np.sqrt(VX**2 + VY**2)
+
+# GRÁFICO 1: Campo vectorial sobre curvas de nivel de omega
+fig, axes = plt.subplots(1, 2, figsize=(16, 7))
+
+# --- Subplot izquierdo: Campo vectorial con curvas de nivel ---
+ax1 = axes[0]
+
+# Curvas de nivel de omega
+omega_max = np.sqrt(8*K/m)
+levels = np.linspace(0, omega_max, 20)
+contour = ax1.contourf(KX, KY, omega, levels=levels, cmap='viridis', alpha=0.6)
+ax1.contour(KX, KY, omega, levels=levels[::2], colors='white', linewidths=0.4, alpha=0.5)
+
+# Campo vectorial (quiver)
+# Normalizamos los vectores para que el color represente la magnitud
+# y las flechas tengan tamaño uniforme visible
+V_norm = np.sqrt(VX**2 + VY**2)
+V_norm[V_norm < 1e-12] = 1e-12  # evitar división por cero
+
+# apartado para ver la escala para visualizar uniformidad
+scale_factor = 0.8  # ajusta tamaño de flechas
+Q = ax1.quiver(KX, KY, VX/V_norm, VY/V_norm, 
+               V_mag,                # color según magnitud
+               cmap='hot',
+               scale=30,             # tamaño de flechas
+               width=0.004,
+               pivot='mid',
+               alpha=0.9)
+
+# definimos la primera Zona de Brillouin
+zona_x = [-np.pi/a, np.pi/a, np.pi/a, -np.pi/a, -np.pi/a]
+zona_y = [-np.pi/a, -np.pi/a, np.pi/a, np.pi/a, -np.pi/a]
+ax1.plot(zona_x, zona_y, 'w--', linewidth=1.5, alpha=0.7)
+
+# Puntos de alta simetría
+ax1.plot(0, 0, 'o', color='cyan', markersize=10, markeredgecolor='black', label=r'$\Gamma$')
+ax1.plot([np.pi/a, -np.pi/a, 0, 0], [0, 0, np.pi/a, -np.pi/a], 
+         'o', color='lime', markersize=8, markeredgecolor='black', label=r'$X$')
+ax1.plot([np.pi/a, -np.pi/a, np.pi/a, -np.pi/a], 
+         [np.pi/a, -np.pi/a, -np.pi/a, np.pi/a], 
+         'o', color='red', markersize=8, markeredgecolor='black', label=r'$M$')
+
+ax1.set_xlabel(r'$k_x$', fontsize=13)
+ax1.set_ylabel(r'$k_y$', fontsize=13)
+ax1.set_title(r'Campo vectorial $\mathbf{v}_g(k_x, k_y)$' + '\n' + 
+              r'Flechas: dirección de $\mathbf{v}_g$  |  Color: magnitud $|\mathbf{v}_g|$', 
+              fontsize=13)
+ax1.set_aspect('equal')
+ax1.legend(fontsize=10, loc='upper right')
+fig.colorbar(contour, ax=ax1, shrink=0.7, label=r'$\omega$')
+fig.colorbar(Q, ax=ax1, shrink=0.7, label=r'$|\mathbf{v}_g|$', 
+             ticks=[0, 0.5*V_mag.max(), V_mag.max()])
+
+# --- Subplot derecho: Magnitud de v_g en un ajuste del tipo calor, esto nos permitira ver la intensidad reflejada en cada espacio
+# ya que como sabemos, se presenta anisotropia
+ax2 = axes[1]
+
+im = ax2.pcolormesh(KX, KY, V_mag, cmap='hot', shading='auto')
+# Superponer streamlines (líneas de flujo) de v_g
+ax2.streamplot(KX, KY, VX, VY, color='white', density=2, linewidth=0.8, arrowsize=1.2)
+
+ax2.set_xlabel(r'$k_x$', fontsize=13)
+ax2.set_ylabel(r'$k_y$', fontsize=13)
+ax2.set_title(r'Magnitud $|\mathbf{v}_g|$ y líneas de flujo', fontsize=14)
+ax2.set_aspect('equal')
+
+ax2.plot(zona_x, zona_y, 'w--', linewidth=1.5, alpha=0.7)
+ax2.plot(0, 0, 'o', color='cyan', markersize=10, markeredgecolor='white')
+ax2.plot([np.pi/a, -np.pi/a, 0, 0], [0, 0, np.pi/a, -np.pi/a], 
+         'o', color='lime', markersize=8, markeredgecolor='white')
+ax2.plot([np.pi/a, -np.pi/a, np.pi/a, -np.pi/a], 
+         [np.pi/a, -np.pi/a, -np.pi/a, np.pi/a], 
+         'o', color='red', markersize=8, markeredgecolor='white')
+
+fig.colorbar(im, ax=ax2, shrink=0.8, label=r'$|\mathbf{v}_g|$')
+
+plt.tight_layout()
+plt.show()
