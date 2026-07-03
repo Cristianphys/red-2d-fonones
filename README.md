@@ -1,46 +1,72 @@
-# Simulación Numérica de Modos Fonónicos y Densidad de Estados (DOS) en una Red Cristalina 2D
-VOY A COLOCAR UN RESUMEN DEL TRABAJO, EL PROBLEMA, EL RESULTADO Y CONCLUSIONES OBTENIDAS EN EL TRABAJO
+# Numerical Simulation of Phononic Modes and Density of States (DOS) in a 2D Crystal Lattice
+I WILL INCLUDE A SUMMARY OF THE WORK, THE PROBLEM, THE RESULTS, AND THE CONCLUSIONS REACHED.
 
-## Partes del Proyecto
-* **Resolución Teórica:**Formulacion analitica de la vibaracion de una red bidimensional monoatomica en la Primera Zona de Brillouin.
-* **Cálculo Numérico:** Implementación en Python utilizando `NumPy` y `SciPy` para resolver problemas de eigenvalores en la Primera Zona de Brillouin.
-* **Visualización de Datos:** Gráficas de alta calidad de las ramas fonónicas y de la DOS numérica frente a la analítica (Singularidades de Van Hove) usando `Matplotlib`.
+## Project Components
+* **Theoretical Solution:** Analytical formulation of the vibration of a two-dimensional monoatomic lattice in the First Brillouin Zone.
 
----
+* **Numerical Calculation:** Implementation in Python using NumPy and SciPy to solve eigenvalue problems in the First Brillouin Zone.
 
-## Resolucion Teórica
-Voy a colocar las ecuaciones operaciones importantes junto con su significado
-
-
-## Resultados y Gráficas
-resultados de los codigos Python dejados en carpeta src.
-### 1. Relación de Dispersión Fonónica
-*(Inserta aquí tu gráfica de las bandas de energía/frecuencia)*
-![Relación de Dispersión](assets/grafico1.png)
-
-### 2. Densidad de Estados Numérica (DOS)
-*(Inserta aquí tu gráfica del histograma o curva de la DOS, idealmente mostrando las singularidades)*
-![Densidad de Estados](assets/dos_numerical.png)
+* **Data Visualization:** High-quality plots of the phononic branches and the numerical versus analytical DOS (Van Hove Singularities) using Matplotlib.
 
 ---
 
-## Librerías Utilizadas en Python
+## Theoretical Resolution
+**Equation of Motion**
+To find the equation of motion, we will use Newton's laws. Let $U_n(t)$ be the scalar longitudinal displacement. Considering the lattice in 2-D, there will be a displacement with a horizontal component $n_x$ and a vertical component $n_y$. Therefore, we will consider the neighbors (below, above, to the left, and to the right) of the atom at position $U_n$.
+Since each atom interacts via a spring (an interpretation of a reciprocal lattice), each atom exerts a restoring force and a buoyant force, as described by Hooke's Law.
 
-* **Python 3.x** - Lenguaje principal de desarrollo.
-* **NumPy** - Para la construcción de mallas en el espacio recíproco y operaciones matriciales eficientes.
-* **SciPy** - Utilizado para la diagonalización matemática y algoritmos de integración.
-* **Matplotlib & Seaborn** - Para la generación de gráficos científicos listos para publicación.
-* **LaTeX** - Empleado para la redacción del reporte detallado del proyecto.
+$$F = -K \Delta X$$
+
+Given the forces that arise during a 2-D network vibration, we can use
+$$\sum F = ma$$  
+
+where, by equating using Newton's third law, we can find the total forces of the 2D crystal lattice.
+
+The equation of motion for a classical two-dimensional square lattice.
+$$\sum F = m \frac{d^2 u_n}{dt^2} = K \left[ U_{n_x+1, n_y} - U_{n_x, n_y} + U_{n_x-1, n_y} - U_{n_x, n_y} + U_{n_x, n_y-1} - U_{n_x, n_y} + U_{n_x, n_y+1} - U_{n_x, n_y} \right]$$
+
+**Since we are working with a periodic network, we can propose a Bloch wave as a solution:
+
+$$ U_n(t) = A e^{i(\vec{k} \cdot \vec{R}_n - \omega t)}$$
+where, by operating on the previously obtained equation of motion, we can find the dispersion relation. The dispersion relation for 2-D network vibration is defined as:
+$$ \omega(k_{x}, k_{y}) = \sqrt{\frac{4K}{m} \left[ \sin^2\left(\frac{k_x a}{2}\right) + \sin^2\left(\frac{k_y a}{2}\right) \right]}$$
+## Results and Graphs
+Results from the Python code left in the src folder.
+
+### 1. Phononic Dispersion Ratio
+*(Insert your energy/frequency band graph here)*
+![Dispersion Ratio](assets/graph1.png)
+
+### 2. Numerical Density of States (DOS)
+*(Insert your DOS histogram or curve graph here, ideally showing singularities)*
+![Density of States](assets/dos_numerical.png)
+
+---
+
+## Libraries Used in Python
+
+* **Python 3.x** - Main development language.
+
+* **NumPy** - For constructing meshes in reciprocal space and efficient matrix operations.
+
+* **SciPy** - Used for mathematical diagonalization and integration algorithms.
+
+* **Matplotlib & Seaborn** - For generating publication-ready scientific plots.
+
+* **LaTeX** - Used for writing the detailed project report.
 
 -------------
 
-## 📁 Estructura del Repositorio
-* `/src`: Contiene los scripts de Python (`simulacion_red.py` o Jupyter Notebooks).
-* `/assets`: Imágenes y gráficas utilizadas en este archivo de presentación.
+## 📁 Repository Structure
+* `/src`: Contains the Python scripts (`simulacion_red.py` or Jupyter Notebooks).
+
+* `/assets`: Images and graphics used in this presentation file.
+
 ---------------------
 
-## 🔧 Cómo Ejecutar la Simulación
+## 🔧 How to Run the Simulation
 
-1. Clona este repositorio:
-   ```bash
+1. Clone this repository:
+
+``bash
    git clone [https://github.com/TU_USUARIO/red-bidimensional-fonones.git](https://github.com/TU_USUARIO/red-bidimensional-fonones.git)
