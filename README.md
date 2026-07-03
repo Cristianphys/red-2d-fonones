@@ -115,16 +115,22 @@ Based on the results above, the group velocity is not isotropic throughout $1^a$
 Results from the Python code left in the src folder.
 
 ### 1. Phononic Dispersion Ratio
-Figure 1. grafico de la dispersion
+**Figure 1. grafico de la dispersion**
 ![Dispersion Ratio](assets/grafico1.png)
 Figure 1 shows a saddle-shaped surface that allows us to quantify the frequency magnitude at the high symmetry points $\Gamma$, $X$, and $M$.
 We see that in the case of $\Gamma$, the values ​​are smaller than those of $\omega(k_x,k_y)$, since this region is considered the long-wave limit, equivalent to the Debye model. As $k_x$ and $k_y$ take on values, $\omega(k_x,k_y)$ increases until the regions that define the first Briolluin zone, $X$ and $M$, with $X$ representing the regions where the value of $\omega(k_x,k_y)$ is at its maximum. The graph on the right provides a clearer view of the frequency behavior. Regions near $\Gamma$ have a circular shape, indicating that they represent constant frequencies in all directions.
 
-### 2. Numerical Density of States (DOS)
-*(Insert your DOS histogram or curve graph here, ideally showing singularities)*
-![Density of States](assets/dos_numerical.png)
+Figure 2. Graph of the magnitude and flow of group velocity for a two-dimensional network.
+![group speed](assets/grafic2.png).
+--
+Figure 2 shows the magnitude and flux of the wave's group velocity in the first Broullin zone, where the yellow coloration indicates the highest velocity magnitude near the Gamma region.
+The magnitude and flux decrease as we move away from Gamma, where the black dots represent the high symmetry points mentioned earlier. It's worth noting that the propagation velocity for a two-dimensional monoatomic lattice exhibits anisotropy due to the flux observed as we move away from Gamma, while near Gamma, X, and M result in non-constant velocities.
+Figure 2. Graph of the magnitude and flow of group velocity for a two-dimensional network.
+![group speed](assets/vgcampo.png).
 
----
+
+
+
 
 ## Libraries Used in Python
 
