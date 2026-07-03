@@ -29,7 +29,19 @@ $$\sum F = m \frac{d^2 u_n}{dt^2} = K \left[ U_{n_x+1, n_y} - U_{n_x, n_y} + U_{
 
 $$ U_n(t) = A e^{i(\vec{k} \cdot \vec{R}_n - \omega t)}$$
 where, by operating on the previously obtained equation of motion, we can find the dispersion relation. The dispersion relation for 2-D network vibration is defined as:
+
 $$ \omega(k_{x}, k_{y}) = \sqrt{\frac{4K}{m} \left[ \sin^2\left(\frac{k_x a}{2}\right) + \sin^2\left(\frac{k_y a}{2}\right) \right]}$$
+
+Dispersión en la primera zona de Brillouin
+Basándonos en el caso de 1-D, la primera Zona de Brillouin sería $-\frac{\pi}{a} < k \leq \frac{\pi}{a}$, lo cual para el caso de 2-D $k_x$ y $k_y$ tenemos en
+
+$$  -\frac{\pi}{a} < k_x \leq \frac{\pi}{a} \quad , \quad -\frac{\pi}{a} < k_y \leq \frac{\pi}{a}$$
+
+es coherente ya que esta red es cuadrada en el espacio recíproco.
+
+**puntos de alta simetría $$\Gamma$,X,M$$, donde ahora vamos a Calcularlos; estos símbolos nos permiten entender qué valores toman
+$k_x,k_y$*
+-----
 ## Results and Graphs
 Results from the Python code left in the src folder.
 
